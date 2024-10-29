@@ -1,0 +1,26 @@
+api_auth_login:
+  methods: [ 'POST' ]
+  path: /api/auth/login
+  controller: TekosInteractive\SaaLoginBundle\Action\Auth\Login
+api_auth_logout:
+  methods: [ 'POST' ]
+  path: /api/auth/logout
+  controller: TekosInteractive\SaaLoginBundle\Action\Auth\Logout
+api_auth_reset_password:
+  methods: [ 'POST' ]
+  path: /api/auth/reset-password
+  controller: TekosInteractive\SaaLoginBundle\Action\Auth\ResetPassword
+api_auth_forgot_password:
+  methods: [ 'POST' ]
+  path: /api/auth/forgot-password
+  controller: TekosInteractive\SaaLoginBundle\Action\Auth\ForgotPassword
+api_auth_profile:
+  methods: [ 'GET' ]
+  path: /api/auth/profile
+  controller: TekosInteractive\SaaLoginBundle\Action\Auth\ShowProfile
+
+# Front routes
+front_auth_reset_password:
+  path: /reset-password/{token}
+front_auth_forgot_password:
+  path: /forgot-password/{token}

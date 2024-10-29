@@ -1,0 +1,9 @@
+###> symfony/framework-bundle ###
+/vendor/
+/var/
+###< symfony/framework-bundle ###
+
+###> editors ###
+/.idea
+/.vscode
+###< editors ###

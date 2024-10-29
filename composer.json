@@ -1,0 +1,58 @@
+{
+  "name": "tekos-interactive/saa-login-bundle",
+  "type": "symfony-bundle",
+  "description": "SAA Login Bundle on TekosInteractive",
+  "license": "MIT",
+  "require": {
+    "php": ">=8.2",
+    "friendsofsymfony/rest-bundle": "^3.5",
+    "symfony/framework-bundle": "^6.2",
+    "symfony/security-bundle": "^6.2",
+    "symfony/runtime": "^6.2",
+    "symfony/serializer": "^6.2",
+    "symfony/console": "^6.2",
+    "symfony/dotenv": "^6.2",
+    "symfony/config": "^6.2",
+    "symfony/yaml": "^6.2",
+    "symfony/dependency-injection": "^6.2",
+    "symfonycasts/reset-password-bundle": "^1.17",
+    "doctrine/orm": "^2.14",
+    "tekos-interactive/saa-core-bundle": "^1.1.1",
+    "tekos-interactive/saa-user-bundle": "^0.1.2"
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "git@github.com:TekosInteractive/saa-endpointmaker-bundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:TekosInteractive/saa-core-bundle.git"
+    },
+    {
+      "type": "vcs",
+      "url": "git@github.com:TekosInteractive/saa-user-bundle.git"
+    }
+  ],
+  "require-dev": {
+    "pem-fr/php-test-tools": "^8.2",
+    "tekos-interactive/saa-endpointmaker-bundle": "1.2.2",
+    "symfony/maker-bundle": "^1.50"
+  },
+  "autoload": {
+    "psr-4": {
+      "TekosInteractive\\SaaLoginBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "TekosInteractive\\SaaLoginBundle\\Tests\\": "tests/"
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "symfony/flex": true,
+      "symfony/runtime": true
+    }
+  }
+}
