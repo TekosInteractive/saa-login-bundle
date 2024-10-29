@@ -1,0 +1,51 @@
+parameters:
+  app.name: '%env(APP_NAME)%'
+  app.supported.locales: [ 'en','fr' ]
+  timezone: '%env(APP_TIMEZONE)%'
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Automatically injects dependencies in your services.
+    autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    public: true
+
+  _instanceof:
+    TekosInteractive\SaaCoreBundle\Infra\DtoFactories\InputFactories\InputFactoryInterface:
+      tags:
+        - { name: app.input_factory }
+    TekosInteractive\SaaCoreBundle\Infra\DtoFactories\OutputFactories\OutputFactoryInterface:
+      tags:
+        - { name: app.output_factory }
+    TekosInteractive\SaaCoreBundle\Domain\OutputFactories\OutputFactoryInterface:
+      tags:
+        - { name: domain.output_factory }
+
+  TekosInteractive\SaaLoginBundle\:
+    resource: '../src/'
+    exclude:
+      - '../src/Kernel.php'
+      - '../src/Tests/'
+      - '../src/Action/*/Dtos/'
+      - '../src/Domain/Entities/'
+      - '../src/Domain/Dtos/'
+      - '../src/Domain/Structures/'
+      - '../src/Infra/Exceptions/'
+      - '../src/Infra/EventDispatcher/'
+      - '../src/Infra/Events/'
+      - '../src/Infra/EventSubscribers/'
+  TekosInteractive\SaaCoreBundle\Infra\DtoFactories\InputFactories\ServiceLocatorInputFactoryProvider:
+    class: TekosInteractive\SaaCoreBundle\Infra\DtoFactories\InputFactories\ServiceLocatorInputFactoryProvider
+    arguments: [ !tagged_locator { tag: app.input_factory, index_by: 'key', default_index_method: 'supportedInput' } ]
+    lazy: true
+
+  TekosInteractive\SaaCoreBundle\Infra\DtoFactories\OutputFactories\ServiceLocatorOutputFactoryProvider:
+    class: TekosInteractive\SaaCoreBundle\Infra\DtoFactories\OutputFactories\ServiceLocatorOutputFactoryProvider
+    arguments: [ !tagged_locator { tag: app.output_factory, index_by: 'key', default_index_method: 'supportedOutput' } ]
+    lazy: true
+
+  TekosInteractive\SaaCoreBundle\Domain\OutputFactories\ServiceLocatorOutputFactoryProvider:
+    class: TekosInteractive\SaaCoreBundle\Domain\OutputFactories\ServiceLocatorOutputFactoryProvider
+    arguments: [
+      !tagged_locator { tag: domain.output_factory, index_by: 'key', default_index_method: 'supportedOutput' }
+    ]
+    lazy: true
